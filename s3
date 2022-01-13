@@ -1,0 +1,95 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+
+using namespace std;
+
+int prices[] = { 3, 3, 2, 2, 1, 1 };
+
+int calculatePrice(int drink_choice)
+{
+    return prices[drink_choice];
+}
+
+void menu()
+{
+    int Ice_Coffee = 3;
+    int Ice_Tea = 3;
+    int Milk_Coffee = 2;
+    int Milk_Tea = 2;
+    int Black_Coffee = 1;
+    int Black_Tea = 1;
+
+    cout << endl
+        << setw(15) << " 0 -> Ice_Coffee ->    " << Ice_Coffee << " DHS " << setw(44) << setfill(' ') << " 1 -> Ice_Tea    " << Ice_Tea << " DHS " << endl
+        << endl;
+
+    cout << endl
+        << setfill(' ') << setw(15) << " 2 -> Milk_Coffee  " << Milk_Coffee << " DHS " << setw(49) << setfill(' ') << " 3 -> Milk_Tea     " << Milk_Tea << " DHS " << endl
+        << endl;
+    cout << endl
+        << setfill(' ') << setw(15) << " 4 -> Black_Coffee    " << Black_Coffee << " DHS " << setw(44) << setfill(' ') << " 5 -> Black_Tea   " << Black_Tea << " DHS " << endl
+        << endl;
+    cout << endl
+        << endl
+        << "" << setfill('-') << setw(50) << " END " << setw(50) << setfill('-') << ""
+        << endl;
+    cout << "\n";
+    cout << "\t\t\t\t Welcome\n"<<endl;
+    cout << "What would you like to drink?" << endl;
+}
+int main()
+{
+    char drinks[][50] = { "Ice Coffee", "Milk Coffee", "Black Coffee", "Ice Tea  ", "Milk Tea", "Black Tea" };
+
+    menu();
+
+    int tea_coffee;
+    cin >> tea_coffee;
+    tea_coffee--;
+
+    while (tea_coffee > 6 || tea_coffee < 0)
+    {
+        cout << "Enter a value between 1 ~~ 5: ";
+        cin >> tea_coffee;
+    }
+
+    cout << "Would you like to add sugar in your drink?(y/n)\n";
+
+    char sugar;
+    cin >> sugar;
+    toupper(sugar);
+
+    switch (sugar)
+    {
+    case 'y':
+        cout << " sugar added.\n\n";
+        break;
+    case 'n':
+        cout << "sugarless coffee is ready.\n\n";
+    }
+
+    int price = calculatePrice(tea_coffee);
+
+    int money = -1;
+
+    for (int i = 0; money < price; i++)
+    {
+        cout << "Enter the amount of money you have: ";
+        cin >> money;
+        if (money < price)
+        {
+            cout << "Please enter amount above: " << calculatePrice(tea_coffee) << "\n\n";
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    cout << "\nYou have ordered " << drinks[tea_coffee] << endl;
+    cout << "\n\n\t\t\t**Your bill is " << price << " AED*\n\n";
+    cout << "\n\n\t\t\tHave your change " << money - price << " AED\n\n";
+
+    cout << "\t\t\tThank you .\n";
+}
